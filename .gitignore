@@ -1,4 +1,15 @@
 ﻿
+# .NET build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
 # Terraform
 *.tfstate
 *.tfstate.*
@@ -10,6 +21,7 @@ override.tf.json
 .terraformrc
 terraform.tfvars.secret
 prod.tfvars
+terraform.tfvars
 
 # Azure/Local
 .env.local
