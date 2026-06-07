@@ -1,0 +1,21 @@
+﻿
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.tfvars.secret
+prod.tfvars
+
+# Azure/Local
+.env.local
+appsettings.local.json
+user-secrets/
+
+# IDE
+.DS_Store
+Thumbs.db

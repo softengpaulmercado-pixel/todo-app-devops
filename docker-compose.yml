@@ -1,0 +1,40 @@
+services:
+  app:
+    build:
+      context: ./src/TodoApi
+      dockerfile: Dockerfile
+    container_name: todoapi
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=TodoDb;User Id=sa;Password=SecurePassword123!;Encrypt=false;TrustServerCertificate=true;
+    depends_on:
+      - sqlserver
+    networks:
+      - todonet
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/todo"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: todoapi-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SecurePassword123!
+    ports:
+      - "1433:1433"
+    networks:
+      - todonet
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "SecurePassword123!" -Q "SELECT 1"
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  todonet:
+    driver: bridge

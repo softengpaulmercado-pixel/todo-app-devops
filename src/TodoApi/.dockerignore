@@ -1,0 +1,9 @@
+bin/
+obj/
+.git/
+.gitignore
+README.md
+.vscode/
+.idea/
+*.user
+*.suo
